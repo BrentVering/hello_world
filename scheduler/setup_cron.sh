@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Setup script for scheduling hello.py to run every 5 minutes
+# Setup script for scheduling hello.py to run at midnight every night
 
 # Get the absolute path to the hello.py script
 HELLO_SCRIPT="/home/brentvering/simpler_data/repos/dgx_launcher/hello_world/hello.py"
@@ -11,7 +11,7 @@ LOG_FILE="$HELLO_DIR/cron_output.log"
 chmod +x "$HELLO_SCRIPT"
 
 # Create the cron job entry (cd to the script directory so the log file is created there)
-CRON_JOB="*/5 * * * * cd $HELLO_DIR && /usr/bin/env python3 $HELLO_SCRIPT >> $LOG_FILE 2>&1"
+CRON_JOB="0 * * * * cd $HELLO_DIR && /usr/bin/env python3 $HELLO_SCRIPT >> $LOG_FILE 2>&1"
 
 # Check if the cron job already exists
 (crontab -l 2>/dev/null | grep -F "$HELLO_SCRIPT") && {
